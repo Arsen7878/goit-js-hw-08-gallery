@@ -94,25 +94,28 @@ function onClickGallery(e) {
   globalID = Number(e.target.dataset.elid);
 
   lightboxRef.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
   lightboxImage.src = e.target.parentElement.href;
 }
 
 function onCloseBtnBackdrop() {
   lightboxRef.classList.remove('is-open');
+  document.body.style.overflow = '';
   lightboxImage.src = '';
 }
 
 function onCloseOverlay(e) {
   if (e.target === lightboxOverlay) {
     lightboxRef.classList.remove('is-open');
+    document.body.style.overflow = '';
   }
 }
 
-function onClickESC(e) {
+function onCloseClickESC(e) {
   if (!lightboxRef.classList.contains('is-open')) {
     return;
   }
-
+  document.body.style.overflow = '';
   if (e.keyCode === 27) {
     lightboxRef.classList.remove('is-open');
   }
@@ -122,7 +125,6 @@ function onSlide(e) {
   if (!lightboxRef.classList.contains('is-open')) {
     return;
   }
-
   if (e.keyCode === 37 || e.keyCode === 65) {
     preSlide(e);
   }
@@ -151,7 +153,7 @@ function appSlide(e) {
 galleryRef.addEventListener('click', onClickGallery);
 btnClose.addEventListener('click', onCloseBtnBackdrop);
 lightboxOverlay.addEventListener('click', onCloseOverlay);
-document.addEventListener('keydown', onClickESC);
+document.addEventListener('keydown', onCloseClickESC);
 document.addEventListener('keydown', onSlide);
 document.addEventListener('wheel', _.debounce(onScroll, 100));
 
