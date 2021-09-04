@@ -156,6 +156,7 @@ lightboxOverlay.addEventListener('click', onCloseOverlay);
 document.addEventListener('keydown', onCloseClickESC);
 document.addEventListener('keydown', onSlide);
 document.addEventListener('wheel', _.debounce(onScroll, 100));
+document.addEventListener('touchmove', onScroll);
 
 function onScroll(e) {
   if (!lightboxRef.classList.contains('is-open')) {
